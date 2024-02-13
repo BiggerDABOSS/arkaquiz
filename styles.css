@@ -13,11 +13,6 @@ header {
     text-align: center;
 }
 
-.logo img {
-    width: 150px; /* Adjust the logo width as needed */
-    height: auto; /* Maintain aspect ratio */
-}
-
 .title {
     margin-top: 10px;
 }
