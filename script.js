@@ -9,8 +9,6 @@ const questionBank = [
     { question: 'What is 15 + 9', answer: '24', difficulty: 1 },
     { question: 'What is 20 - 7', answer: '13', difficulty: 1 },
     { question: 'What is 18 + 3', answer: '21', difficulty: 1 },
-
-    // Add more questions here...
 ];
 
 const quizContainer = document.getElementById('quiz-container');
