@@ -127,4 +127,55 @@ function displayQuestion() {
 function checkAnswer() {
     const userAnswer = document.getElementById('answer').value.trim();
     const currentQuestion = questionBank.filter(question => question.difficulty === currentDifficulty)[currentQuestionIndex % 10];
-    if (user
+    if (userAnswer === currentQuestion.answer) {
+        correctAnswers++;
+        score += currentDifficulty;
+        feedback.textContent = 'Correct!';
+        if (correctAnswers % 1 === 0 && currentDifficulty < 10) {
+            currentDifficulty += 2; // Increase difficulty by 2 for every correct answer
+        }
+    } else {
+        feedback.textContent = 'Incorrect. Try again.';
+    }
+    scoreDisplay.textContent = `Score: ${score}`;
+}
+
+function getNextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex === totalQuestions) {
+        endQuiz(); // End quiz when maximum number of questions is reached
+        return;
+    }
+    displayQuestion();
+}
+
+function endQuiz() {
+    quizContainer.innerHTML = '';
+    feedback.textContent = `Quiz completed! Your score is: ${score}`;
+    restartBtn.style.display = 'block';
+    submitBtn.style.display = 'none'; // Hide the submit button at the end of the quiz
+}
+
+startBtn.addEventListener('click', () => {
+    currentQuestionIndex = 0;
+    score = 0;
+    correctAnswers = 0;
+    currentDifficulty = 1; // Reset difficulty level
+    displayQuestion();
+    startBtn.style.display = 'none';
+    restartBtn.style.display = 'none'; // Hide the restart button at the start
+    submitBtn.style.display = 'block'; // Show the submit button at the start
+    scoreDisplay.textContent = '';
+});
+
+restartBtn.addEventListener('click', () => { // Add event listener for restart button
+    startBtn.click(); // Simulate a click on the start button to restart the quiz
+});
+
+submitBtn.addEventListener('click', () => { // Add event listener for submit button
+    checkAnswer();
+    getNextQuestion();
+});
+
+// Shuffle the question bank array to randomize the order of questions
+questionBank.sort(() => Math.random() - 0.5);
