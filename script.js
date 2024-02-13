@@ -114,6 +114,17 @@ let correctAnswers = 0;
 let currentDifficulty = 1; // Start with difficulty level 1
 let totalQuestions = 10; // Maximum of 10 questions
 
+// Function to display the next question
+function displayNextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < totalQuestions) {
+        displayQuestion();
+    } else {
+        endQuiz(); // End quiz when all questions have been answered
+    }
+}
+
+// Function to display the current question
 function displayQuestion() {
     // Filter questions from the question bank based on the current difficulty level
     const filteredQuestions = questionBank.filter(question => question.difficulty === currentDifficulty);
@@ -124,6 +135,7 @@ function displayQuestion() {
                                <input type="text" id="answer">`;
 }
 
+// Function to check the answer
 function checkAnswer() {
     const userAnswer = document.getElementById('answer').value.trim();
     const currentQuestion = questionBank.filter(question => question.difficulty === currentDifficulty)[currentQuestionIndex % 10];
@@ -140,15 +152,7 @@ function checkAnswer() {
     scoreDisplay.textContent = `Score: ${score}`;
 }
 
-function getNextQuestion() {
-    currentQuestionIndex++;
-    if (currentQuestionIndex === totalQuestions) {
-        endQuiz(); // End quiz when maximum number of questions is reached
-        return;
-    }
-    displayQuestion();
-}
-
+// Function to end the quiz
 function endQuiz() {
     quizContainer.innerHTML = '';
     feedback.textContent = `Quiz completed! Your score is: ${score}`;
@@ -156,6 +160,7 @@ function endQuiz() {
     submitBtn.style.display = 'none'; // Hide the submit button at the end of the quiz
 }
 
+// Event listener for the "Start Quiz" button
 startBtn.addEventListener('click', () => {
     currentQuestionIndex = 0;
     score = 0;
@@ -168,7 +173,8 @@ startBtn.addEventListener('click', () => {
     scoreDisplay.textContent = '';
 });
 
-restartBtn.addEventListener('click', () => { // Add event listener for restart button
+// Event listener for the "Restart Quiz" button
+restartBtn.addEventListener('click', () => { 
     currentQuestionIndex = 0;
     score = 0;
     correctAnswers = 0;
@@ -178,10 +184,10 @@ restartBtn.addEventListener('click', () => { // Add event listener for restart b
     submitBtn.style.display = 'block'; // Show the submit button after clicking
 });
 
-
-submitBtn.addEventListener('click', () => { // Add event listener for submit button
+// Event listener for the "Submit Answer" button
+submitBtn.addEventListener('click', () => {
     checkAnswer();
-    getNextQuestion();
+    displayNextQuestion(); // Call function to display the next question
 });
 
 // Shuffle the question bank array to randomize the order of questions
