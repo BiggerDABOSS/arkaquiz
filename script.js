@@ -101,11 +101,8 @@ const questionBank = [
     { question: 'What is 156 x 117 x 4 x 2', answer: '146016', difficulty: 10 },
 ];
 
-questionBank.sort(() => Math.random() - 0.5);
-
 const quizContainer = document.getElementById('quiz-container');
 const startBtn = document.getElementById('start-btn');
-const restartBtn = document.getElementById('restart-btn');
 const submitBtn = document.getElementById('submit-btn');
 const feedback = document.getElementById('feedback');
 const scoreDisplay = document.getElementById('score');
@@ -116,91 +113,62 @@ let correctAnswers = 0;
 let currentDifficulty = 1; // Start with difficulty level 1
 let totalQuestions = 10; // Maximum of 10 questions
 
-// Function to display the next question
-function displayNextQuestion() {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < totalQuestions) {
-        displayQuestion();
-    } else {
-        endQuiz();
-    }
-}
-
-// Function to display the current question
 function displayQuestion() {
+    // Filter questions from the question bank based on the current difficulty level
     const filteredQuestions = questionBank.filter(question => question.difficulty === currentDifficulty);
-    if (filteredQuestions.length > 0) {
-        const currentQuestion = filteredQuestions[currentQuestionIndex % filteredQuestions.length];
-        console.log("Current question:", currentQuestion); // Log the correct question
-        quizContainer.innerHTML = `<p>${currentQuestion.question}</p>
-                                   <input type="text" id="answer">`;
-    } else {
-        quizContainer.innerHTML = "<p>No questions available for the current difficulty level. Please try again.</p>";
-    }
+    // Get the current question from the filtered list of questions
+    const currentQuestion = filteredQuestions[currentQuestionIndex % filteredQuestions.length];
+    quizContainer.innerHTML = '';
+    quizContainer.innerHTML = `<p>${currentQuestion.question}</p>
+                               <input type="text" id="answer">`;
 }
 
-
-
-// Function to check the answer
 function checkAnswer() {
     const userAnswer = document.getElementById('answer').value.trim();
-    console.log("User's answer:", userAnswer);
-    const currentQuestion = questionBank[currentQuestionIndex];
-    console.log("Current question:", currentQuestion);
+    const currentQuestion = questionBank.filter(question => question.difficulty === currentDifficulty)[currentQuestionIndex % 10];
     if (userAnswer === currentQuestion.answer) {
         correctAnswers++;
-        score += currentQuestion.difficulty;
-        console.log("Correct answer");
+        score += currentDifficulty;
         feedback.textContent = 'Correct!';
-        currentDifficulty += 2; // Increase difficulty by 2 for every correct answer
-    } else {
-        console.log("Incorrect answer");
-        feedback.textContent = 'Incorrect. Try again.';
-        currentDifficulty -= 1; // Decrease difficulty by 1 for every incorrect answer
-        if (currentDifficulty < 1) {
-            currentDifficulty = 1; // Ensure difficulty doesn't go below 1
+        if (correctAnswers % 1 === 0 && currentDifficulty < 10) {
+            currentDifficulty += 2; // Increase difficulty by 2 for every correct answer
         }
+    } else {
+        feedback.textContent = 'Incorrect. Try again.';
     }
     scoreDisplay.textContent = `Score: ${score}`;
-    console.log("Current difficulty:", currentDifficulty);
 }
 
+function getNextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex === totalQuestions) {
+        endQuiz(); // End quiz when maximum number of questions is reached
+        return;
+    }
+    displayQuestion();
+}
 
-// Function to end the quiz
 function endQuiz() {
     quizContainer.innerHTML = '';
-    feedback.textContent = 'Quiz completed! Your score is: ${score}';
-    restartBtn.style.display = 'block';
-    submitBtn.style.display = 'none'; // Hide the submit button at the end of the quiz
+    feedback.textContent = `Quiz completed! Your score is: ${score}`;
+    submitBtn.style.display = 'none';
 }
 
-// Event listener for the "Start Quiz" button
 startBtn.addEventListener('click', () => {
     currentQuestionIndex = 0;
     score = 0;
     correctAnswers = 0;
+    currentDifficulty = 1; // Reset difficulty level
     displayQuestion();
     startBtn.style.display = 'none';
-    restartBtn.style.display = 'none';
     submitBtn.style.display = 'block';
     scoreDisplay.textContent = '';
 });
 
-// Event listener for the "Restart Quiz" button
-restartBtn.addEventListener('click', () => {
-    currentQuestionIndex = 0;
-    score = 0;
-    correctAnswers = 0;
-    displayQuestion();
-    restartBtn.style.display = 'none';
-    submitBtn.style.display = 'block';
-});
-
-// Event listener for the "Submit Answer" button
 submitBtn.addEventListener('click', () => {
     checkAnswer();
-    displayNextQuestion();
+    getNextQuestion();
 });
 
 // Shuffle the question bank array to randomize the order of questions
-
+questionBank.sort(() => Math.random() - 0.5);
