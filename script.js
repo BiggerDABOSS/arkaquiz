@@ -130,8 +130,8 @@ function displayNextQuestion() {
 function displayQuestion() {
     const filteredQuestions = questionBank.filter(question => question.difficulty === currentDifficulty);
     const currentQuestion = filteredQuestions[currentQuestionIndex % filteredQuestions.length];
-    quizContainer.innerHTML = `<p>${currentQuestion.question}</p>
-                               <input type="text" id="answer">`;
+    quizContainer.innerHTML = '<p>${currentQuestion.question}</p>
+                               <input type="text" id="answer">';
 }
 
 // Function to check the answer
@@ -162,7 +162,7 @@ function checkAnswer() {
 // Function to end the quiz
 function endQuiz() {
     quizContainer.innerHTML = '';
-    feedback.textContent = `Quiz completed! Your score is: ${score}`;
+    feedback.textContent = 'Quiz completed! Your score is: ${score}';
     restartBtn.style.display = 'block';
     submitBtn.style.display = 'none'; // Hide the submit button at the end of the quiz
 }
