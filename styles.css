@@ -68,4 +68,13 @@ footer {
     text-align: center;
     margin-top: 20px;
     padding: 10px 0;
-    backgrou
+    background-color: #333; /* Dark footer background color */
+    color: #fff; /* Light footer text color */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#submit-btn {
+    display: none; /* Hide the "Submit Answer" button by default */
+}
