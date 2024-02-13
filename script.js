@@ -138,19 +138,22 @@ function displayQuestion() {
 // Function to check the answer
 function checkAnswer() {
     const userAnswer = document.getElementById('answer').value.trim();
-    const currentQuestion = questionBank.filter(question => question.difficulty === currentDifficulty)[currentQuestionIndex % 10];
+    const currentQuestion = questionBank[currentQuestionIndex];
     if (userAnswer === currentQuestion.answer) {
         correctAnswers++;
-        score += currentDifficulty;
+        score += currentQuestion.difficulty;
         feedback.textContent = 'Correct!';
-        if (correctAnswers % 1 === 0 && currentDifficulty < 10) {
-            currentDifficulty += 2; // Increase difficulty by 2 for every correct answer
-        }
+        currentDifficulty += 2; // Increase difficulty by 2 for every correct answer
     } else {
         feedback.textContent = 'Incorrect. Try again.';
+        currentDifficulty -= 1; // Decrease difficulty by 1 for every incorrect answer
+        if (currentDifficulty < 1) {
+            currentDifficulty = 1; // Ensure difficulty doesn't go below 1
+        }
     }
     scoreDisplay.textContent = `Score: ${score}`;
 }
+
 
 // Function to end the quiz
 function endQuiz() {
