@@ -129,10 +129,12 @@ function displayNextQuestion() {
 // Function to display the current question
 function displayQuestion() {
     const filteredQuestions = questionBank.filter(question => question.difficulty === currentDifficulty);
-    const currentQuestion = filteredQuestions[currentQuestionIndex % filteredQuestions.length];
+    const currentQuestion = filteredQuestions[currentQuestionIndex];
+    console.log("Current question:", currentQuestion); // Log the correct question
     quizContainer.innerHTML = '<p>${currentQuestion.question}</p>
                                <input type="text" id="answer">';
 }
+
 
 // Function to check the answer
 function checkAnswer() {
