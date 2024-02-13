@@ -13,6 +13,7 @@ const scoreDisplay = document.getElementById('score');
 let currentQuestionIndex = 0;
 let score = 0;
 let correctAnswers = 0;
+let totalQuestions = 10; // Total number of questions to answer
 
 function displayQuestion() {
     const currentQuestion = questionBank[currentQuestionIndex];
@@ -40,7 +41,7 @@ function getNextQuestion() {
         correctAnswers = 0;
     }
     currentQuestionIndex++;
-    if (currentQuestionIndex < questionBank.length) {
+    if (currentQuestionIndex < totalQuestions) {
         displayQuestion();
     } else {
         endQuiz();
