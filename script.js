@@ -103,20 +103,20 @@ const questionBank = [
 
 const quizContainer = document.getElementById('quiz-container');
 const startBtn = document.getElementById('start-btn');
-const submitBtn = document.getElementById('submit-btn');
+const restartBtn = document.getElementById('restart-btn');
 const feedback = document.getElementById('feedback');
 const scoreDisplay = document.getElementById('score');
 
 let currentQuestionIndex = 0;
 let score = 0;
 let correctAnswers = 0;
-let currentDifficulty = 1; // Start with difficulty level 1
-let totalQuestions = 10; // Maximum of 10 questions
+let currentDifficulty = 1; 
+let totalQuestions = 10; 
 
 function displayQuestion() {
-    // Filter questions from the question bank based on the current difficulty level
+
     const filteredQuestions = questionBank.filter(question => question.difficulty === currentDifficulty);
-    // Get the current question from the filtered list of questions
+
     const currentQuestion = filteredQuestions[currentQuestionIndex % filteredQuestions.length];
     quizContainer.innerHTML = '';
     quizContainer.innerHTML = `<p>${currentQuestion.question}</p>
@@ -151,24 +151,28 @@ function getNextQuestion() {
 function endQuiz() {
     quizContainer.innerHTML = '';
     feedback.textContent = `Quiz completed! Your score is: ${score}`;
-    submitBtn.style.display = 'none';
+    restartBtn.style.display = 'block';
 }
 
 startBtn.addEventListener('click', () => {
     currentQuestionIndex = 0;
     score = 0;
     correctAnswers = 0;
-    currentDifficulty = 1; // Reset difficulty level
+    currentDifficulty = 1; 
     displayQuestion();
     startBtn.style.display = 'none';
-    submitBtn.style.display = 'block';
+    restartBtn.style.display = 'none';
     scoreDisplay.textContent = '';
 });
 
-submitBtn.addEventListener('click', () => {
-    checkAnswer();
-    getNextQuestion();
+restartBtn.addEventListener('click', () => {
+    currentQuestionIndex = 0;
+    score = 0;
+    correctAnswers = 0;
+    currentDifficulty = 1; 
+    displayQuestion();
+    restartBtn.style.display = 'none';
+    scoreDisplay.textContent = '';
 });
 
-// Shuffle the question bank array to randomize the order of questions
 questionBank.sort(() => Math.random() - 0.5);
