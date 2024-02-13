@@ -101,6 +101,8 @@ const questionBank = [
     { question: 'What is 156 x 117 x 4 x 2', answer: '146016', difficulty: 10 },
 ];
 
+questionBank.sort(() => Math.random() - 0.5);
+
 const quizContainer = document.getElementById('quiz-container');
 const startBtn = document.getElementById('start-btn');
 const restartBtn = document.getElementById('restart-btn');
@@ -194,4 +196,4 @@ submitBtn.addEventListener('click', () => {
 });
 
 // Shuffle the question bank array to randomize the order of questions
-questionBank.sort(() => Math.random() - 0.5);
+
