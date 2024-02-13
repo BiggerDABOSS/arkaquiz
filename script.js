@@ -1,5 +1,5 @@
 const questionBank = [
-	{ question: 'What is 2 + 2 ', answer: '4', difficulty: 1 },
+    { question: 'What is 2 + 2 ', answer: '4', difficulty: 1 },
     { question: 'What is 3 + 5', answer: '8', difficulty: 1 },
     { question: 'What is 6 - 3', answer: '3', difficulty: 1 },
     { question: 'What is 7 + 4', answer: '11', difficulty: 1 },
