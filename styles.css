@@ -12,6 +12,12 @@ body {
     padding: 20px;
 }
 
+.logo {
+    display: block;
+    width: 200px; /* Adjust width as needed */
+    margin: 0 auto 20px; /* Center the logo and add some space below */
+}
+
 h1 {
     text-align: center;
 }
