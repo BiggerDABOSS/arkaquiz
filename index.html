@@ -1,35 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math Quiz</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
-        <div class="logo">
-            <!-- Your logo goes here -->
-            <img src="logo.png" alt="Logo">
-        </div>
-        <h1 class="title">Math Quiz</h1>
+        <h1>Math Quiz</h1>
+        <img src="logo.png" alt="Quiz Logo">
     </header>
 
     <main>
         <div id="quiz-container">
-            <!-- Quiz questions will be displayed here -->
+            <p id="question"></p>
+            <input type="text" id="answer">
+            <button id="submit-answer">Submit Answer</button>
+            <button id="next-question">Next Question</button>
         </div>
-        <button id="start-btn">Start Quiz</button>
-        <button id="submit-btn">Submit Answer</button>
-        <button id="restart-btn">Restart Quiz</button> <!-- Added restart button -->
-        <p id="feedback"></p>
-        <p id="score"></p>
+        <div id="feedback"></div>
+        <div id="score"></div>
     </main>
 
     <footer>
-        <!-- Your footer content goes here -->
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+        <button id="start-quiz">Start Quiz</button>
+        <button id="restart-quiz">Restart Quiz</
