@@ -39,8 +39,6 @@ const questionBank = [
 { question: 'What is 66 - 29', answer: '37', difficulty: 4 },
 { question: 'What is 58 + 35', answer: '93', difficulty: 4 },
 { question: 'What is 72 - 39', answer: '33', difficulty: 4 },
-
-
 { question: 'What is 84 ÷ 7 ', answer: '12', difficulty: 5 },
 { question: 'What is 126 ÷ 9', answer: '14', difficulty: 5 },
 { question: 'What is 63 ÷ 7', answer: '9', difficulty: 5 },
