@@ -43,7 +43,7 @@ const questionBank = [
     { question: 'What is 128 + 189', answer: '317', difficulty: 5 },
     { question: 'What is 630 + 612', answer: '1242', difficulty: 5 },
     { question: 'What is 681 + 885', answer: '1566', difficulty: 5 },
-    { question: 'What is 923 + 596, answer: 1082’, difficulty: 5 },
+    { question: 'What is 923 + 596', answer: '1082', difficulty: 5 },
     { question: 'What is 837 + 701', answer: '1538', difficulty: 5 },
     { question: 'What is 848 + 161', answer: '1009', difficulty: 5 },
     { question: 'What is 940 + 768', answer: '1708', difficulty: 5 },
