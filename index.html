@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arka Academy Quiz</title>
+    <title>Math Quiz</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <header>
-        <img src="logo.png" alt="Quiz Logo">
+    <div class="container">
+        <img src="logo.png" alt="Logo" class="logo"> <!-- Add your logo here -->
         <h1>Math Quiz</h1>
-    </header>
-    <div id="quiz-container"></div>
-    <form id="answer-form">
-        <input type="text" id="answer" placeholder="Enter your answer">
-        <button type="submit" id="submit-answer">Submit Answer</button>
-    </form>
-    <button id="next-question">Next Question</button>
-    <div id="feedback"></div>
-    <div id="score"></div>
-    <button id="restart-quiz">Restart Quiz</button>
+        <div class="quiz" id="quiz">
+            <div id="question"></div>
+            <input type="text" id="answer" placeholder="Your answer">
+            <button id="submitBtn">Submit</button>
+        </div>
+        <div id="scoreSection" style="display: none;">
+            <h2>Your Score</h2>
+            <div id="finalScore"></div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
+
 </html>
