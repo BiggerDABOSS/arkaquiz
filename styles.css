@@ -12,11 +12,6 @@ header {
     text-align: center;
 }
 
-.logo img {
-    max-width: 50px; /* Adjust the maximum width as needed */
-    max-height: 50px; /* Adjust the maximum height as needed */
-}
-
 .title {
     margin-top: 10px;
 }
