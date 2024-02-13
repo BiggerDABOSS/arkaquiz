@@ -169,8 +169,15 @@ startBtn.addEventListener('click', () => {
 });
 
 restartBtn.addEventListener('click', () => { // Add event listener for restart button
-    startBtn.click(); // Simulate a click on the start button to restart the quiz
+    currentQuestionIndex = 0;
+    score = 0;
+    correctAnswers = 0;
+    currentDifficulty = 1; // Reset difficulty level
+    displayQuestion();
+    restartBtn.style.display = 'none'; // Hide the restart button after clicking
+    submitBtn.style.display = 'block'; // Show the submit button after clicking
 });
+
 
 submitBtn.addEventListener('click', () => { // Add event listener for submit button
     checkAnswer();
