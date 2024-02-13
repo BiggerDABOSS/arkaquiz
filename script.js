@@ -1,4 +1,7 @@
+// Define the question bank
 const questionBank = [
+    { question: 'What is 2 + 2', answer: '4', difficulty: 1 },
+    { question: 'What is 3 + 5', answer: '8', difficulty: 1 },
     { question: 'What is 2 + 2 ', answer: '4', difficulty: 1 },
     { question: 'What is 3 + 5', answer: '8', difficulty: 1 },
     { question: 'What is 6 - 3', answer: '3', difficulty: 1 },
@@ -99,76 +102,71 @@ const questionBank = [
     { question: 'What is 132 x 99 x 3 x 2', answer: '78408', difficulty: 10 },
     { question: 'What is 144 x 108 x 3 x 2', answer: '93312', difficulty: 10 },
     { question: 'What is 156 x 117 x 4 x 2', answer: '146016', difficulty: 10 },
+
 ];
 
+// Shuffle the question bank array to randomize the order of questions
+questionBank.sort(() => Math.random() - 0.5);
+
+// Get DOM elements
 const quizContainer = document.getElementById('quiz-container');
-const startBtn = document.getElementById('start-btn');
-const submitBtn = document.getElementById('submit-btn');
+const submitAnswerBtn = document.getElementById('submit-answer');
+const nextQuestionBtn = document.getElementById('next-question');
 const feedback = document.getElementById('feedback');
 const scoreDisplay = document.getElementById('score');
 
+// Initialize quiz variables
 let currentQuestionIndex = 0;
 let score = 0;
-let correctAnswers = 0;
-let currentDifficulty = 1; // Start with difficulty level 1
-let totalQuestions = 10; // Maximum of 10 questions
 
+// Function to display the current question
 function displayQuestion() {
-    // Filter questions from the question bank based on the current difficulty level
-    const filteredQuestions = questionBank.filter(question => question.difficulty === currentDifficulty);
-    // Get the current question from the filtered list of questions
-    const currentQuestion = filteredQuestions[currentQuestionIndex % filteredQuestions.length];
-    quizContainer.innerHTML = '';
+    const currentQuestion = questionBank[currentQuestionIndex];
     quizContainer.innerHTML = `<p>${currentQuestion.question}</p>
                                <input type="text" id="answer">`;
 }
 
+// Function to check the answer
 function checkAnswer() {
     const userAnswer = document.getElementById('answer').value.trim();
-    const currentQuestion = questionBank.filter(question => question.difficulty === currentDifficulty)[currentQuestionIndex % 10];
-    if (userAnswer === currentQuestion.answer) {
-        correctAnswers++;
-        score += currentDifficulty;
+    const currentQuestion = questionBank[currentQuestionIndex];
+    if (userAnswer.toLowerCase() === currentQuestion.answer.toLowerCase()) {
+        score += currentQuestion.difficulty;
         feedback.textContent = 'Correct!';
-        if (correctAnswers % 1 === 0 && currentDifficulty < 10) {
-            currentDifficulty += 2; // Increase difficulty by 2 for every correct answer
-        }
     } else {
         feedback.textContent = 'Incorrect. Try again.';
     }
     scoreDisplay.textContent = `Score: ${score}`;
 }
 
-function getNextQuestion() {
+// Function to display the next question
+function displayNextQuestion() {
     currentQuestionIndex++;
-    if (currentQuestionIndex === totalQuestions) {
-        endQuiz(); // End quiz when maximum number of questions is reached
-        return;
+    if (currentQuestionIndex < questionBank.length) {
+        displayQuestion();
+        feedback.textContent = '';
+    } else {
+        endQuiz();
     }
-    displayQuestion();
 }
 
+// Function to end the quiz
 function endQuiz() {
     quizContainer.innerHTML = '';
     feedback.textContent = `Quiz completed! Your score is: ${score}`;
-    submitBtn.style.display = 'none';
+    submitAnswerBtn.style.display = 'none';
+    nextQuestionBtn.style.display = 'none';
 }
 
-startBtn.addEventListener('click', () => {
-    currentQuestionIndex = 0;
-    score = 0;
-    correctAnswers = 0;
-    currentDifficulty = 1; // Reset difficulty level
-    displayQuestion();
-    startBtn.style.display = 'none';
-    submitBtn.style.display = 'block';
-    scoreDisplay.textContent = '';
-});
-
-submitBtn.addEventListener('click', () => {
+// Event listener for the "Submit Answer" button
+submitAnswerBtn.addEventListener('click', () => {
     checkAnswer();
-    getNextQuestion();
 });
 
-// Shuffle the question bank array to randomize the order of questions
-questionBank.sort(() => Math.random() - 0.5);
+// Event listener for the "Next Question" button
+nextQuestionBtn.addEventListener('click', () => {
+    displayNextQuestion();
+});
+
+// Display the first question when the page loads
+displayQuestion();
