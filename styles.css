@@ -12,6 +12,15 @@ header {
     text-align: center;
 }
 
+.logo img {
+    max-width: 150px; /* Adjust the maximum width as needed */
+    max-height: 150px; /* Adjust the maximum height as needed */
+}
+
+.title {
+    margin-top: 10px;
+}
+
 main {
     max-width: 600px;
     margin: 20px auto;
@@ -38,22 +47,4 @@ button {
 }
 
 button:hover {
-    background-color: #555;
-}
-
-#feedback {
-    font-weight: bold;
-    text-align: center;
-    color: #333;
-}
-
-footer {
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px 0;
-    background-color: #333;
-    color: #fff;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
+    background-colo
