@@ -6,9 +6,9 @@ const questionBank = [
     { question: 'What is 9 - 5', answer: '4', difficulty: 1 },
     { question: 'What is 8 + 6', answer: '14', difficulty: 1 },
     { question: 'What is 10 - 2', answer: '8', difficulty: 1 },
-    { question: 'What is 10 + 9', answer: '24', difficulty: 1 },
-    { question: 'What is 10 - 7', answer: '13', difficulty: 1 },
-    { question: 'What is 11 + 3', answer: '21', difficulty: 1 },
+    { question: 'What is 10 + 9', answer: '19', difficulty: 1 },
+    { question: 'What is 10 - 7', answer: '3', difficulty: 1 },
+    { question: 'What is 11 + 3', answer: '14', difficulty: 1 },
     { question: 'What is 20 + 5 ', answer: '25', difficulty: 2 },
     { question: 'What is 48 - 24', answer: '24', difficulty: 2 },
     { question: 'What is 16 + 73', answer: '89', difficulty: 2 },
@@ -43,7 +43,7 @@ const questionBank = [
     { question: 'What is 128 + 189', answer: '317', difficulty: 5 },
     { question: 'What is 630 + 612', answer: '1242', difficulty: 5 },
     { question: 'What is 681 + 885', answer: '1566', difficulty: 5 },
-    { question: 'What is 923 + 596', answer: '1082', difficulty: 5 },
+    { question: 'What is 923 + 596’, answer: ‘1519’, difficulty: 5 },
     { question: 'What is 837 + 701', answer: '1538', difficulty: 5 },
     { question: 'What is 848 + 161', answer: '1009', difficulty: 5 },
     { question: 'What is 940 + 768', answer: '1708', difficulty: 5 },
@@ -96,15 +96,15 @@ const questionBank = [
     { question: 'What is 96 x 72 x 3 x 2', answer: '41472', difficulty: 10 },
     { question: 'What is 108 x 81 x 3 x 2', answer: '51840', difficulty: 10 },
     { question: 'What is 120 x 90 x 4 x 2', answer: '86400', difficulty: 10 },
-    { question: 'What is 132 x 99 x 3 x 2', answer: '65340', difficulty: 10 },
+    { question: 'What is 132 x 99 x 3 x 2', answer: '78408', difficulty: 10 },
     { question: 'What is 144 x 108 x 3 x 2', answer: '93312', difficulty: 10 },
-    { question: 'What is 156 x 117 x 4 x 2', answer: '92448', difficulty: 10 },
+    { question: 'What is 156 x 117 x 4 x 2', answer: '146016', difficulty: 10 },
 ];
 
 const quizContainer = document.getElementById('quiz-container');
 const startBtn = document.getElementById('start-btn');
-const restartBtn = document.getElementById('restart-btn'); // Get the restart button
-const submitBtn = document.getElementById('submit-btn'); // Get the submit button
+const restartBtn = document.getElementById('restart-btn');
+const submitBtn = document.getElementById('submit-btn');
 const feedback = document.getElementById('feedback');
 const scoreDisplay = document.getElementById('score');
 
@@ -120,17 +120,13 @@ function displayNextQuestion() {
     if (currentQuestionIndex < totalQuestions) {
         displayQuestion();
     } else {
-        endQuiz(); // End quiz when all questions have been answered
+        endQuiz();
     }
 }
 
 // Function to display the current question
 function displayQuestion() {
-    // Filter questions from the question bank based on the current difficulty level
-    const filteredQuestions = questionBank.filter(question => question.difficulty === currentDifficulty);
-    // Get the current question from the filtered list of questions
-    const currentQuestion = filteredQuestions[currentQuestionIndex % filteredQuestions.length];
-    quizContainer.innerHTML = '';
+    const currentQuestion = questionBank[currentQuestionIndex];
     quizContainer.innerHTML = `<p>${currentQuestion.question}</p>
                                <input type="text" id="answer">`;
 }
@@ -154,7 +150,6 @@ function checkAnswer() {
     scoreDisplay.textContent = `Score: ${score}`;
 }
 
-
 // Function to end the quiz
 function endQuiz() {
     quizContainer.innerHTML = '';
@@ -168,29 +163,27 @@ startBtn.addEventListener('click', () => {
     currentQuestionIndex = 0;
     score = 0;
     correctAnswers = 0;
-    currentDifficulty = 1; // Reset difficulty level
     displayQuestion();
     startBtn.style.display = 'none';
-    restartBtn.style.display = 'none'; // Hide the restart button at the start
-    submitBtn.style.display = 'block'; // Show the submit button at the start
+    restartBtn.style.display = 'none';
+    submitBtn.style.display = 'block';
     scoreDisplay.textContent = '';
 });
 
 // Event listener for the "Restart Quiz" button
-restartBtn.addEventListener('click', () => { 
+restartBtn.addEventListener('click', () => {
     currentQuestionIndex = 0;
     score = 0;
     correctAnswers = 0;
-    currentDifficulty = 1; // Reset difficulty level
     displayQuestion();
-    restartBtn.style.display = 'none'; // Hide the restart button after clicking
-    submitBtn.style.display = 'block'; // Show the submit button after clicking
+    restartBtn.style.display = 'none';
+    submitBtn.style.display = 'block';
 });
 
 // Event listener for the "Submit Answer" button
 submitBtn.addEventListener('click', () => {
     checkAnswer();
-    displayNextQuestion(); // Call function to display the next question
+    displayNextQuestion();
 });
 
 // Shuffle the question bank array to randomize the order of questions
