@@ -135,13 +135,17 @@ function displayQuestion() {
 // Function to check the answer
 function checkAnswer() {
     const userAnswer = document.getElementById('answer').value.trim();
+    console.log("User's answer:", userAnswer);
     const currentQuestion = questionBank[currentQuestionIndex];
+    console.log("Current question:", currentQuestion);
     if (userAnswer === currentQuestion.answer) {
         correctAnswers++;
         score += currentQuestion.difficulty;
+        console.log("Correct answer");
         feedback.textContent = 'Correct!';
         currentDifficulty += 2; // Increase difficulty by 2 for every correct answer
     } else {
+        console.log("Incorrect answer");
         feedback.textContent = 'Incorrect. Try again.';
         currentDifficulty -= 1; // Decrease difficulty by 1 for every incorrect answer
         if (currentDifficulty < 1) {
@@ -149,7 +153,9 @@ function checkAnswer() {
         }
     }
     scoreDisplay.textContent = `Score: ${score}`;
+    console.log("Current difficulty:", currentDifficulty);
 }
+
 
 // Function to end the quiz
 function endQuiz() {
