@@ -13,14 +13,21 @@
         <img src="logo.png" alt="Logo" class="logo"> <!-- Add your logo here -->
         <h1>Math Quiz</h1>
         <div class="quiz" id="quiz">
-            <div id="question"></div>
+            <form id="question"></form>
+            <div id="feedback"></div>
+            <div id="diff"></div>
+            <div id = "currentScore"></div>
+            
             <input type="text" id="answer" placeholder="Your answer">
             <button id="submitBtn">Submit</button>
+            <button id = "endBtn">End Quiz / Restart</button>
         </div>
         <div id="scoreSection" style="display: none;">
             <h2>Your Score</h2>
             <div id="finalScore"></div>
+            <button id = "restartBtn">Restart</button>
         </div>
+        
     </div>
 
     <script src="script.js"></script>
