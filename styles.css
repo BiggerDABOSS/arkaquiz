@@ -42,7 +42,7 @@ h1 {
     display: block;
     width: 100%;
     padding: 15px;
-    background-color: #4CAF50; /* Submit button color */
+    background-color: #226d25; /* Submit button color */
     border: none;
     color: white;
     cursor: pointer;
@@ -55,7 +55,26 @@ h1 {
 
 #submitBtn:hover {
     background-color: #45a049; /* Button color on hover */
-    transform: scale(1.05); /* Increase button size on hover */
+    transform: scale(1.02); /* Increase button size on hover */
+}
+
+#endBtn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #7a1310; /* Submit button color */
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px; /* Rounded corners */
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+#endBtn:hover {
+    background-color: #4b0528; /* Button color on hover */
+    transform: scale(1.02); /* Increase button size on hover */
 }
 
 #scoreSection {
