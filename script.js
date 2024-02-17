@@ -171,7 +171,7 @@ function getNextQuestion() {
 
         const randomIndex = Math.floor(Math.random() * filteredQuestions.length);
         const nextQuestion = filteredQuestions[randomIndex];
-        currentQuestionIndex = randQ.indexOf(nextQuestion)
+        currentQuestionIndex = randQ.indexOf(nextQuestion);
 
 
         displayQuestion(nextQuestion);
@@ -215,8 +215,10 @@ rstBtn.addEventListener('click', () => {
 });
 
 
-
-const firstQuestion = randQ[currentQuestionIndex];
-displayQuestion(firstQuestion);
+const filteredQuestions2 = randQ.filter(question => question.difficulty === currentDifficulty);
+const randomIndex2 = Math.floor(Math.random() * filteredQuestions2.length);
+const firstq = filteredQuestions2[randomIndex2];
+currentQuestionIndex = randQ.indexOf(firstq);
+displayQuestion(firstq);
 displayScore();
 
